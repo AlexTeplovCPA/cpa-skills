@@ -16,9 +16,11 @@ The current focus is a structured review of bookkeeping exports before CPA sign-
 
 ## What is a Skill?
 
-A skill is a reusable instruction file that teaches an AI model how to perform a specific accounting task consistently.
+A skill is a folder containing a `SKILL.md` file that teaches an AI agent how to perform a specific task consistently. The `SKILL.md` file includes a YAML frontmatter block with a name and description, followed by the full instructions in Markdown.
 
-Unlike a one-off prompt, a skill defines a fixed objective, required inputs, and a structured output format. It functions as a digital operational playbook for your AI workspace: load it at the start of a session and the same task runs consistently across multiple engagements without re-explaining the instructions each time.
+Unlike a one-off prompt, a skill defines a fixed objective, required inputs, and a structured output format. It functions as a reusable operational playbook: the agent discovers and loads it automatically when the task matches the skill's description, without re-explaining the instructions each time.
+
+Skills follow the open [Agent Skills standard](https://agentskills.io) and work identically across Claude, OpenAI Codex, and Google Gemini CLI.
 
 ---
 
@@ -71,60 +73,44 @@ Earlier skills prepare and structure accounting data. Later skills analyze the l
 
 ## Repository Structure
 
-```text
-skills/
-   ingestion/
-      document-processing
-   classification/
-      transaction-categorization
-      vendor-mapping
-   reconciliation/
-      bank-reconciliation
-   review/
-      ledger-anomaly-detection
-      bookkeeping-review
-   communication/
-      client-query-generator
-   tax/
-      gsthst
-      t1
-      t2
-```
-
----
-
-## How to Use a Skill
-
-Skills are designed to be loaded into an AI session before performing a task.
-
-Typical workflow:
-
-1. Start a new AI session.
-2. Load the relevant skill file from the `skills/` directory.
-3. Provide the required input data (for example a ledger export or bank statement).
-4. The AI follows the structured instructions defined in the skill and produces a consistent output.
-
-Example workflow for bookkeeping review:
+Each skill is a self-contained folder with a `SKILL.md` file. Optional `scripts/`, `references/`, and `assets/` subdirectories can be added inside a skill folder as needed.
 
 ```text
-load skill → bookkeeping-review
-input → ledger-export.csv
-output → flagged transactions and review notes
-```
+ingestion/
+   document-processing/
+      SKILL.md
 
-Because the instructions are structured and reusable, the same accounting task runs consistently across multiple engagements.
+classification/
+   transaction-categorization/
+      SKILL.md
+   vendor-mapping/
+      SKILL.md
 
----
+reconciliation/
+   bank-reconciliation/
+      SKILL.md
 
-## Example Data
+review/
+   ledger-anomaly-detection/
+      SKILL.md
+   bookkeeping-review/
+      SKILL.md
+      references/
+      scripts/
 
-The `examples/` directory contains sample datasets for testing skills without using real client data.
+communication/
+   client-query-generator/
+      SKILL.md
 
-Example files may include:
+tax/
+   gsthst/
+      SKILL.md
+   t1/
+      SKILL.md
+   t2/
+      SKILL.md
 
-```text
 examples/
-
    ledger-export.csv
    bank-statement.csv
    receipts/
@@ -134,9 +120,45 @@ examples/
       t1-sample-documents/
 ```
 
-These files simulate typical accounting inputs such as bookkeeping exports, bank statements, receipts and invoices, and basic tax document packages.
+---
+
+## Installation
+
+**Claude (claude.ai):**
+1. Download or clone this repository
+2. Zip the skill folder you want to install (e.g. `bookkeeping-review.zip`)
+3. Go to Settings > Capabilities > Skills > Upload skill
+4. The agent discovers and loads the skill automatically when relevant
+
+**Claude Code:**
+Place the skill folder in `~/.claude/skills/`. Claude Code discovers skills automatically.
+
+**OpenAI Codex:**
+Place the skill folder in `~/.agents/skills/`. Codex discovers skills automatically.
+
+**Google Gemini CLI:**
+Place the skill folder in `~/.gemini/skills/` or `~/.agents/skills/`. Gemini CLI discovers skills automatically.
+
+These skills follow the open [Agent Skills standard](https://agentskills.io) and work across all compatible agents without modification.
 
 ---
+
+## How to Use a Skill
+
+Once installed, the agent discovers and loads the relevant skill automatically based on your request. You do not need to invoke it manually.
+
+Example:
+
+```text
+request → "review this bookkeeping export before sign-off"
+agent loads → bookkeeping-review
+input → ledger-export.csv
+output → flagged transactions and review notes
+```
+
+For explicit invocation in Claude Code or Codex CLI, reference the skill by name in your prompt.
+
+
 
 ## Project Principles
 
