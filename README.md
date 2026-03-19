@@ -6,91 +6,81 @@ Most AI tools in accounting are built by people who understand LLMs. These are b
 
 This repository is a collection of structured AI instruction workflows designed to handle the repeatable, data-heavy parts of accounting work so practitioners can focus on professional judgment.
 
----
-
-## Current Build: `bookkeeping-review`
+## Current Build: bookkeeping-review
 
 The current focus is a structured review of bookkeeping exports before CPA sign-off. This skill identifies accounting anomalies and classification errors that a human reviewer might miss during a high-volume month-end.
 
----
-
 ## What is a Skill?
 
-A skill is a folder containing a `SKILL.md` file that teaches an AI agent how to perform a specific task consistently. The `SKILL.md` file includes a YAML frontmatter block with a name and description, followed by the full instructions in Markdown.
+A skill is a folder containing a SKILL.md file that teaches an AI agent how to perform a specific task consistently. The SKILL.md file includes a YAML frontmatter block with a name and description, followed by the full instructions in Markdown.
 
 Unlike a one-off prompt, a skill defines a fixed objective, required inputs, and a structured output format. It functions as a reusable operational playbook: the agent discovers and loads it automatically when the task matches the skill's description, without re-explaining the instructions each time.
 
-Skills follow the open [Agent Skills standard](https://agentskills.io) and work identically across Claude, OpenAI Codex, and Google Gemini CLI.
-
----
+Skills follow the open Agent Skills standard and work identically across Claude, OpenAI Codex, and Google Gemini CLI.
 
 ## Workflow Pipeline
 
 These skills mirror the actual flow of work inside a Canadian accounting practice.
 
-```text
+```
 documents
    ↓
-ingestion
+01-ingestion
 (receipts, invoices → structured data)
    ↓
-classification
+02-classification
 (vendor mapping, tax treatment)
    ↓
-reconciliation
+03-reconciliation
 (bank feeds → ledger entries)
    ↓
-review
+04-review
 (anomaly detection, bookkeeping-review)
    ↓
-communication
+05-communication
 (client query generation)
    ↓
-tax
+06-tax
 (gsthst / t1 / t2)
 ```
 
 Earlier skills prepare and structure accounting data. Later skills analyze the ledger and flag issues that require professional review. This reflects how accounting work actually happens: most of the effort is spent preparing and validating data before CPA judgment is applied.
 
----
-
 ## Skill Roadmap
 
 | Category | Skill | Status |
 |---|---|---|
-| Review | `bookkeeping-review` | Active build |
-| Ingestion | `document-processing` | Roadmap |
-| Classification | `transaction-categorization` | Roadmap |
-| Classification | `vendor-mapping` | Roadmap |
-| Reconciliation | `bank-reconciliation` | Roadmap |
-| Review | `ledger-anomaly-detection` | Roadmap |
-| Communication | `client-query-generator` | Roadmap |
-| Tax | `gsthst` | Roadmap |
-| Tax | `t1` | Roadmap |
-| Tax | `t2` | Roadmap |
-
----
+| 04-review | bookkeeping-review | Active build |
+| 01-ingestion | document-processing | Roadmap |
+| 02-classification | transaction-categorization | Roadmap |
+| 02-classification | vendor-mapping | Roadmap |
+| 03-reconciliation | bank-reconciliation | Roadmap |
+| 04-review | ledger-anomaly-detection | Roadmap |
+| 05-communication | client-query-generator | Roadmap |
+| 06-tax | gsthst | Roadmap |
+| 06-tax | t1 | Roadmap |
+| 06-tax | t2 | Roadmap |
 
 ## Repository Structure
 
-Each skill is a self-contained folder with a `SKILL.md` file. Optional `scripts/`, `references/`, and `assets/` subdirectories can be added inside a skill folder as needed.
+Each skill is a self-contained folder with a SKILL.md file. Optional `scripts/`, `references/`, and `assets/` subdirectories can be added inside a skill folder as needed.
 
-```text
-ingestion/
+```
+01-ingestion/
    document-processing/
       SKILL.md
 
-classification/
+02-classification/
    transaction-categorization/
       SKILL.md
    vendor-mapping/
       SKILL.md
 
-reconciliation/
+03-reconciliation/
    bank-reconciliation/
       SKILL.md
 
-review/
+04-review/
    ledger-anomaly-detection/
       SKILL.md
    bookkeeping-review/
@@ -98,11 +88,11 @@ review/
       references/
       scripts/
 
-communication/
+05-communication/
    client-query-generator/
       SKILL.md
 
-tax/
+06-tax/
    gsthst/
       SKILL.md
    t1/
@@ -120,28 +110,23 @@ examples/
       t1-sample-documents/
 ```
 
----
-
 ## Installation
 
 **Claude (claude.ai):**
+
 1. Download or clone this repository
 2. Zip the skill folder you want to install (e.g. `bookkeeping-review.zip`)
 3. Go to Settings > Capabilities > Skills > Upload skill
-4. The agent discovers and loads the skill automatically when relevant
 
-**Claude Code:**
-Place the skill folder in `~/.claude/skills/`. Claude Code discovers skills automatically.
+The agent discovers and loads the skill automatically when relevant.
 
-**OpenAI Codex:**
-Place the skill folder in `~/.agents/skills/`. Codex discovers skills automatically.
+**Claude Code:** Place the skill folder in `~/.claude/skills/`. Claude Code discovers skills automatically.
 
-**Google Gemini CLI:**
-Place the skill folder in `~/.gemini/skills/` or `~/.agents/skills/`. Gemini CLI discovers skills automatically.
+**OpenAI Codex:** Place the skill folder in `~/.agents/skills/`. Codex discovers skills automatically.
 
-These skills follow the open [Agent Skills standard](https://agentskills.io) and work across all compatible agents without modification.
+**Google Gemini CLI:** Place the skill folder in `~/.gemini/skills/` or `~/.agents/skills/`. Gemini CLI discovers skills automatically.
 
----
+These skills follow the open Agent Skills standard and work across all compatible agents without modification.
 
 ## How to Use a Skill
 
@@ -149,16 +134,14 @@ Once installed, the agent discovers and loads the relevant skill automatically b
 
 Example:
 
-```text
-request → "review this bookkeeping export before sign-off"
+```
+request  → "review this bookkeeping export before sign-off"
 agent loads → bookkeeping-review
-input → ledger-export.csv
-output → flagged transactions and review notes
+input    → ledger-export.csv
+output   → flagged transactions and review notes
 ```
 
 For explicit invocation in Claude Code or Codex CLI, reference the skill by name in your prompt.
-
-
 
 ## Project Principles
 
@@ -168,17 +151,11 @@ For explicit invocation in Claude Code or Codex CLI, reference the skill by name
 
 **Iterative build.** This is an active log. As CRA interpretations change or new edge cases appear in practice, these skills are updated.
 
----
-
 ## Related Repositories
 
-**[selfemployed-skills](https://github.com/alexteplovcpa/selfemployed-skills)**
-Tax and bookkeeping workflows specifically for Canadian IT contractors, mortgage agents, trades, and real estate professionals.
+**selfemployed-skills** Tax and bookkeeping workflows specifically for Canadian IT contractors, mortgage agents, trades, and real estate professionals.
 
-**[ecommerce-skills](https://github.com/alexteplovcpa/ecommerce-skills)**
-Specialized workflows for marketplace reconciliation, inventory, COGS treatment, and HST handling for Canadian e-commerce sellers.
-
----
+**ecommerce-skills** Specialized workflows for marketplace reconciliation, inventory, COGS treatment, and HST handling for Canadian e-commerce sellers.
 
 ## About
 
