@@ -14,7 +14,7 @@ The goal is to build reusable skills that reflect how accounting work actually m
 
 This repository is practitioner-facing. It is separate from the client-facing repositories:
 
-- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — preparation workflows for Canadian IT contractors and consultants
+- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — preparation workflows for Canadian IT contractors
 - [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — accounting workflows for Canadian e-commerce sellers
 
 ## Why This Repository Exists
@@ -32,18 +32,18 @@ A skill is a folder containing a `SKILL.md` file that teaches an AI agent how to
 The `SKILL.md` file includes:
 
 - YAML frontmatter with a `name` and `description`
-- the workflow instructions in Markdown
+- workflow instructions in Markdown
 - optional supporting files such as `references/`, `scripts/`, and `assets/`
 
 Unlike a one-off prompt, a skill is meant to be reusable. It defines a repeatable task, expected inputs, and a structured output pattern.
 
-## Current Build
+## Current Focus
 
-The current focus is `reviewing-bookkeeping`.
+The current flagship skill is `reviewing-bookkeeping`.
 
 This skill is designed to review bookkeeping exports before CPA sign-off. It looks for anomalies, classification problems, and review points that can be missed in high-volume work when attention is limited and time is compressed.
 
-The build is intentionally starting narrow. The goal is to get one useful workflow working well before expanding the library.
+The build is intentionally starting narrow. The goal is to make one workflow genuinely useful before expanding the library.
 
 ## Workflow Pipeline
 
@@ -73,70 +73,71 @@ preparing-tax-files
 
 Earlier skills prepare and structure accounting data. Later skills review that data, surface issues, and support practitioner decision-making. The point is not to automate judgment away. The point is to improve the quality and consistency of the workflow before judgment is applied.
 
-## Skill Roadmap
+## Current and Planned Skills
 
-| Category | Skill | Status |
-|---|---|---|
-| reviewing | reviewing-bookkeeping | Active build |
-| processing | processing-documents | Roadmap |
-| categorizing | categorizing-transactions | Roadmap |
-| mapping | mapping-vendors | Roadmap |
-| reconciling | reconciling-bank-accounts | Roadmap |
-| reviewing | detecting-ledger-anomalies | Roadmap |
-| generating | generating-client-queries | Roadmap |
-| preparing | preparing-gst-hst-files | Roadmap |
-| preparing | preparing-t1-files | Roadmap |
-| preparing | preparing-t2-files | Roadmap |
+| Category | Skill | Status | Notes |
+|---|---|---|---|
+| reviewing | reviewing-bookkeeping | Active | Current flagship build |
+| reviewing | detecting-ledger-anomalies | In progress | Adjacent review workflow |
+| generating | generating-client-queries | In progress | Follow-up support after review |
+| processing | processing-documents | Planned | Intake and extraction support |
+| categorizing | categorizing-transactions | Planned | Early-stage transaction workflow |
+| mapping | mapping-vendors | Planned | Reusable vendor treatment patterns |
+| reconciling | reconciling-bank-accounts | Planned | Reconciliation support |
+| preparing | preparing-gst-hst-files | Planned | GST/HST workflow support |
+| preparing | preparing-t1-files | Planned | T1 workflow support |
+| preparing | preparing-t2-files | Planned | T2 workflow support |
 
 ## Repository Structure
 
 Each skill is a self-contained folder with a `SKILL.md` file. Optional `references/`, `scripts/`, and `assets/` folders can be added inside a skill when needed.
 
 ```text
-processing/
-   processing-documents/
-      SKILL.md
+skills/
+  processing-documents/
+    SKILL.md
 
-categorizing/
-   categorizing-transactions/
-      SKILL.md
+  categorizing-transactions/
+    SKILL.md
 
-mapping/
-   mapping-vendors/
-      SKILL.md
+  mapping-vendors/
+    SKILL.md
 
-reconciling/
-   reconciling-bank-accounts/
-      SKILL.md
+  reconciling-bank-accounts/
+    SKILL.md
 
-reviewing/
-   detecting-ledger-anomalies/
-      SKILL.md
-   reviewing-bookkeeping/
-      SKILL.md
-      references/
-      scripts/
+  detecting-ledger-anomalies/
+    SKILL.md
 
-generating/
-   generating-client-queries/
-      SKILL.md
+  reviewing-bookkeeping/
+    SKILL.md
+    references/
+    scripts/
 
-preparing/
-   preparing-gst-hst-files/
-      SKILL.md
-   preparing-t1-files/
-      SKILL.md
-   preparing-t2-files/
-      SKILL.md
+  generating-client-queries/
+    SKILL.md
+
+  preparing-gst-hst-files/
+    SKILL.md
+
+  preparing-t1-files/
+    SKILL.md
+
+  preparing-t2-files/
+    SKILL.md
+
+docs/
+  repo-scope.md
+  writing-rules.md
 
 examples/
-   ledger-export.csv
-   bank-statement.csv
-   receipts/
-      sample-receipt-01.pdf
-      sample-receipt-02.pdf
-   tax-package/
-      t1-sample-documents/
+  ledger-export.csv
+  bank-statement.csv
+  receipts/
+    sample-receipt-01.pdf
+    sample-receipt-02.pdf
+  tax-package/
+    t1-sample-documents/
 ```
 
 ## Professional Boundary
@@ -232,7 +233,7 @@ This is a build-in-public project. The workflows should improve as they encounte
 
 ## Related Repositories
 
-- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — Client-facing preparation workflows for Canadian IT contractors and consultants.
+- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — Client-facing preparation workflows for Canadian IT contractors.
 - [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — Client-facing accounting workflows for Canadian e-commerce sellers.
 
 ## About
