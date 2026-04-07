@@ -2,102 +2,131 @@
 
 Practice-tested AI workflow skills for CPAs and bookkeepers.
 
+This repository is a public, profession-facing library of structured AI workflows built around real accounting work. The focus is not generic prompting. It is repeatable workflow design for the parts of tax and bookkeeping work that are structured, reviewable, and worth standardizing.
+
 Most AI tools in accounting are built by people who understand LLMs. These are built by someone who also does the month-end.
 
-This repository is a collection of structured AI instruction workflows designed to handle the repeatable, data-heavy parts of accounting work so practitioners can focus on professional judgment.
+## Repository Purpose
 
-## Current Build: bookkeeping-review
+This repository exists to explore what useful AI workflow design looks like inside a real accounting practice.
 
-The current focus is a structured review of bookkeeping exports before CPA sign-off. This skill identifies accounting anomalies and classification errors that a human reviewer might miss during a high-volume month-end.
+The goal is to build reusable skills that reflect how accounting work actually moves through a firm: collecting documents, organizing data, reconciling records, reviewing outputs, preparing follow-up, and supporting tax work. This is meant to be practical, iterative, and open to discussion.
 
-## What is a Skill?
+This repository is practitioner-facing. It is separate from the client-facing repositories:
 
-A skill is a folder containing a SKILL.md file that teaches an AI agent how to perform a specific task consistently. The SKILL.md file includes a YAML frontmatter block with a name and description, followed by the full instructions in Markdown.
+- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — preparation workflows for Canadian IT contractors and consultants
+- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — accounting workflows for Canadian e-commerce sellers
 
-Unlike a one-off prompt, a skill defines a fixed objective, required inputs, and a structured output format. It functions as a reusable operational playbook: the agent discovers and loads it automatically when the task matches the skill's description, without re-explaining the instructions each time.
+## Why This Repository Exists
 
-Skills follow the open Agent Skills standard and work identically across Claude, OpenAI Codex, and Google Gemini CLI.
+There is a gap between deep technical accounting knowledge and consistent execution of repeatable work inside a practice.
+
+A large share of accounting work is not pure judgment. It is preparing, organizing, spotting issues, following up, and reviewing. Those are the areas where structured AI workflows can help most, if they are built carefully and grounded in actual firm work.
+
+This repository is an attempt to make that layer visible, testable, and reusable.
+
+## What a Skill Is
+
+A skill is a folder containing a `SKILL.md` file that teaches an AI agent how to perform a specific task consistently.
+
+The `SKILL.md` file includes:
+
+- YAML frontmatter with a `name` and `description`
+- the workflow instructions in Markdown
+- optional supporting files such as `references/`, `scripts/`, and `assets/`
+
+Unlike a one-off prompt, a skill is meant to be reusable. It defines a repeatable task, expected inputs, and a structured output pattern.
+
+## Current Build
+
+The current focus is `reviewing-bookkeeping`.
+
+This skill is designed to review bookkeeping exports before CPA sign-off. It looks for anomalies, classification problems, and review points that can be missed in high-volume work when attention is limited and time is compressed.
+
+The build is intentionally starting narrow. The goal is to get one useful workflow working well before expanding the library.
 
 ## Workflow Pipeline
 
-These skills mirror the actual flow of work inside a Canadian accounting practice.
+These skills are organized around the actual flow of work inside a bookkeeping or tax practice.
 
-```
+```text
 documents
    ↓
-01-ingestion
+processing-documents
 (receipts, invoices → structured data)
    ↓
-02-classification
+categorizing-transactions
 (vendor mapping, tax treatment)
    ↓
-03-reconciliation
+reconciling-records
 (bank feeds → ledger entries)
    ↓
-04-review
-(anomaly detection, bookkeeping-review)
+reviewing-bookkeeping
+(anomaly detection, review workflow)
    ↓
-05-communication
-(client query generation)
+generating-client-queries
+(client follow-up and clarification)
    ↓
-06-tax
-(gsthst / t1 / t2)
+preparing-tax-files
+(gst-hst / t1 / t2)
 ```
 
-Earlier skills prepare and structure accounting data. Later skills analyze the ledger and flag issues that require professional review. This reflects how accounting work actually happens: most of the effort is spent preparing and validating data before CPA judgment is applied.
+Earlier skills prepare and structure accounting data. Later skills review that data, surface issues, and support practitioner decision-making. The point is not to automate judgment away. The point is to improve the quality and consistency of the workflow before judgment is applied.
 
 ## Skill Roadmap
 
 | Category | Skill | Status |
 |---|---|---|
-| 04-review | bookkeeping-review | Active build |
-| 01-ingestion | document-processing | Roadmap |
-| 02-classification | transaction-categorization | Roadmap |
-| 02-classification | vendor-mapping | Roadmap |
-| 03-reconciliation | bank-reconciliation | Roadmap |
-| 04-review | ledger-anomaly-detection | Roadmap |
-| 05-communication | client-query-generator | Roadmap |
-| 06-tax | gsthst | Roadmap |
-| 06-tax | t1 | Roadmap |
-| 06-tax | t2 | Roadmap |
+| reviewing | reviewing-bookkeeping | Active build |
+| processing | processing-documents | Roadmap |
+| categorizing | categorizing-transactions | Roadmap |
+| mapping | mapping-vendors | Roadmap |
+| reconciling | reconciling-bank-accounts | Roadmap |
+| reviewing | detecting-ledger-anomalies | Roadmap |
+| generating | generating-client-queries | Roadmap |
+| preparing | preparing-gst-hst-files | Roadmap |
+| preparing | preparing-t1-files | Roadmap |
+| preparing | preparing-t2-files | Roadmap |
 
 ## Repository Structure
 
-Each skill is a self-contained folder with a SKILL.md file. Optional `scripts/`, `references/`, and `assets/` subdirectories can be added inside a skill folder as needed.
+Each skill is a self-contained folder with a `SKILL.md` file. Optional `references/`, `scripts/`, and `assets/` folders can be added inside a skill when needed.
 
-```
-01-ingestion/
-   document-processing/
-      SKILL.md
-
-02-classification/
-   transaction-categorization/
-      SKILL.md
-   vendor-mapping/
+```text
+processing/
+   processing-documents/
       SKILL.md
 
-03-reconciliation/
-   bank-reconciliation/
+categorizing/
+   categorizing-transactions/
       SKILL.md
 
-04-review/
-   ledger-anomaly-detection/
+mapping/
+   mapping-vendors/
       SKILL.md
-   bookkeeping-review/
+
+reconciling/
+   reconciling-bank-accounts/
+      SKILL.md
+
+reviewing/
+   detecting-ledger-anomalies/
+      SKILL.md
+   reviewing-bookkeeping/
       SKILL.md
       references/
       scripts/
 
-05-communication/
-   client-query-generator/
+generating/
+   generating-client-queries/
       SKILL.md
 
-06-tax/
-   gsthst/
+preparing/
+   preparing-gst-hst-files/
       SKILL.md
-   t1/
+   preparing-t1-files/
       SKILL.md
-   t2/
+   preparing-t2-files/
       SKILL.md
 
 examples/
@@ -110,55 +139,104 @@ examples/
       t1-sample-documents/
 ```
 
+## Professional Boundary
+
+These skills are designed to support practitioner work, not replace professional judgment.
+
+Outputs should still be reviewed by a CPA or qualified bookkeeper before they are relied on for client communication, financial reporting, or filing. These workflows are meant to improve consistency and reduce friction in repeatable work, not to bypass review.
+
 ## Installation
 
-**Claude (claude.ai):**
+### Claude (claude.ai)
 
 1. Download or clone this repository
-2. Zip the skill folder you want to install (e.g. `bookkeeping-review.zip`)
-3. Go to Settings > Capabilities > Skills > Upload skill
+2. Zip the skill folder you want to install
+3. Go to **Settings → Capabilities → Skills**
+4. Upload the skill ZIP
 
-The agent discovers and loads the skill automatically when relevant.
+The agent should discover and load the skill automatically when relevant.
 
-**Claude Code:** Place the skill folder in `~/.claude/skills/`. Claude Code discovers skills automatically.
+### Claude Code
 
-**OpenAI Codex:** Place the skill folder in `~/.agents/skills/`. Codex discovers skills automatically.
+Place the skill folder in:
 
-**Google Gemini CLI:** Place the skill folder in `~/.gemini/skills/` or `~/.agents/skills/`. Gemini CLI discovers skills automatically.
+```text
+~/.claude/skills/
+```
 
-These skills follow the open Agent Skills standard and work across all compatible agents without modification.
+### OpenAI Codex
+
+Place the skill folder in:
+
+```text
+~/.agents/skills/
+```
+
+### Google Gemini CLI
+
+Place the skill folder in one of:
+
+```text
+~/.gemini/skills/
+~/.agents/skills/
+```
+
+These skills follow a shared agent-skill style structure and are being developed primarily around Claude-style workflows. Behavior may vary across tools.
 
 ## How to Use a Skill
 
-Once installed, the agent discovers and loads the relevant skill automatically based on your request. You do not need to invoke it manually.
+Once installed, the agent should discover and load the relevant skill based on the task.
 
 Example:
 
-```
-request  → "review this bookkeeping export before sign-off"
-agent loads → bookkeeping-review
-input    → ledger-export.csv
-output   → flagged transactions and review notes
+```text
+request: review this bookkeeping export before sign-off
+skill loaded: reviewing-bookkeeping
+input: ledger-export.csv
+output: flagged transactions and review notes
 ```
 
-For explicit invocation in Claude Code or Codex CLI, reference the skill by name in your prompt.
+For explicit invocation in CLI-based tools, reference the skill by name in your prompt.
+
+## Collaboration and Discussion
+
+This repository is intended to be public and iterative.
+
+The goal is not just to publish finished skills. It is to make workflow design visible enough that other CPAs, bookkeepers, and accounting-technology builders can react to it, challenge it, improve it, and help build better versions.
+
+Useful contributions include:
+
+- workflow suggestions
+- edge cases
+- failure examples
+- structure improvements
+- missing review logic
+- better output patterns
+- practitioner feedback from real use
+
+The standard for inclusion is simple: the workflow should reflect real accounting work and improve repeatability without pretending that judgment no longer matters.
 
 ## Project Principles
 
-**Judgment over automation.** The goal is not a hands-off workflow. The goal is to surface the right information so the CPA can make a faster, better decision.
+**Judging over automating**  
+The goal is not a hands-off system. The goal is to surface the right information so a practitioner can make a faster, better decision.
 
-**Field tested.** Every skill in this repo is tested against real scenarios from two specific domains: Canadian self-employed professionals and e-commerce sellers.
+**Testing in practice over theorizing**  
+This repository is built from real accounting environments, especially self-employed and e-commerce files, rather than generic AI demos.
 
-**Iterative build.** This is an active log. As CRA interpretations change or new edge cases appear in practice, these skills are updated.
+**Reusing over improvising**  
+A good skill should capture a repeatable pattern that is worth using again.
+
+**Iterating in public**  
+This is a build-in-public project. The workflows should improve as they encounter more edge cases and better criticism.
 
 ## Related Repositories
 
-**selfemployed-skills** Tax and bookkeeping workflows specifically for Canadian IT contractors, mortgage agents, trades, and real estate professionals.
-
-**ecommerce-skills** Specialized workflows for marketplace reconciliation, inventory, COGS treatment, and HST handling for Canadian e-commerce sellers.
+- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — Client-facing preparation workflows for Canadian IT contractors and consultants.
+- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — Client-facing accounting workflows for Canadian e-commerce sellers.
 
 ## About
 
 Built by [Alex Teplov, CPA](https://www.linkedin.com/in/alex-teplov/).
 
-I run two specialized accounting practices in Canada and build these workflows to solve operational bottlenecks encountered in real accounting work.
+This repository is part of a broader effort to build practical, profession-grounded AI workflow libraries for accounting work in Canada, with separate repositories for practitioner-facing workflows and client-facing preparation workflows.
