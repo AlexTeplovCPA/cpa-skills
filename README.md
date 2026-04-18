@@ -39,9 +39,9 @@ Unlike a one-off prompt, a skill is meant to be reusable. It defines a repeatabl
 
 ## Current Focus
 
-The current flagship skill is `reviewing-bookkeeping`.
+The current active skill is `researching-tax-questions`.
 
-This skill is designed to review bookkeeping exports before CPA sign-off. It looks for anomalies, classification problems, and review points that can be missed in high-volume work when attention is limited and time is compressed.
+This skill answers Canadian federal tax questions by locating and quoting authoritative source text. It covers T1 personal income tax, GST/HST, and payroll (CPP, EI, source deductions). It returns a direct answer, verbatim legislative and CRA source quotes with section references, and a confidence assessment (Confirmed, Administrative, or Unsettled).
 
 The build is intentionally starting narrow. The goal is to make one workflow genuinely useful before expanding the library.
 
@@ -77,17 +77,17 @@ Earlier skills prepare and structure accounting data. Later skills review that d
 
 | Category | Skill | Status | Notes |
 |---|---|---|---|
-| reviewing | reviewing-bookkeeping | Active | Current flagship build |
-| reviewing | detecting-ledger-anomalies | In progress | Adjacent review workflow |
-| generating | generating-client-queries | In progress | Follow-up support after review |
-| researching | researching-tax-questions | Active | T1, GST/HST, payroll — federal sources, quoted extracts, confidence assessment |
-| processing | processing-documents | Planned | Intake and extraction support |
-| categorizing | categorizing-transactions | Planned | Early-stage transaction workflow |
-| mapping | mapping-vendors | Planned | Reusable vendor treatment patterns |
-| reconciling | reconciling-bank-accounts | Planned | Reconciliation support |
-| preparing | preparing-gst-hst-files | Planned | GST/HST workflow support |
-| preparing | preparing-t1-files | Planned | T1 workflow support |
-| preparing | preparing-t2-files | Planned | T2 workflow support |
+| researching | researching-tax-questions | Active | Current build |
+| reviewing | reviewing-bookkeeping | Planned | |
+| reviewing | detecting-ledger-anomalies | Planned | |
+| generating | generating-client-queries | Planned | |
+| processing | processing-documents | Planned | |
+| categorizing | categorizing-transactions | Planned | |
+| mapping | mapping-vendors | Planned | |
+| reconciling | reconciling-bank-accounts | Planned | |
+| preparing | preparing-gst-hst-files | Planned | |
+| preparing | preparing-t1-files | Planned | |
+| preparing | preparing-t2-files | Planned | |
 
 ## Repository Structure
 
@@ -95,6 +95,20 @@ Each skill is a self-contained folder with a `SKILL.md` file. Optional `referenc
 
 ```text
 skills/
+  researching-tax-questions/
+    SKILL.md
+    references/
+      sources.md
+
+  reviewing-bookkeeping/
+    SKILL.md
+
+  detecting-ledger-anomalies/
+    SKILL.md
+
+  generating-client-queries/
+    SKILL.md
+
   processing-documents/
     SKILL.md
 
@@ -105,17 +119,6 @@ skills/
     SKILL.md
 
   reconciling-bank-accounts/
-    SKILL.md
-
-  detecting-ledger-anomalies/
-    SKILL.md
-
-  reviewing-bookkeeping/
-    SKILL.md
-    references/
-    scripts/
-
-  generating-client-queries/
     SKILL.md
 
   preparing-gst-hst-files/
@@ -192,10 +195,10 @@ Once installed, the agent should discover and load the relevant skill based on t
 Example:
 
 ```text
-request: review this bookkeeping export before sign-off
-skill loaded: reviewing-bookkeeping
-input: ledger-export.csv
-output: flagged transactions and review notes
+request: what is the GST/HST treatment for a zero-rated supply to a US client?
+skill loaded: researching-tax-questions
+input: plain-language question
+output: direct answer, verbatim legislative quote, CRA position quote, confidence level
 ```
 
 For explicit invocation in CLI-based tools, reference the skill by name in your prompt.
@@ -220,16 +223,16 @@ The standard for inclusion is simple: the workflow should reflect real accountin
 
 ## Project Principles
 
-**Judging over automating**  
+**Judging over automating**
 The goal is not a hands-off system. The goal is to surface the right information so a practitioner can make a faster, better decision.
 
-**Testing in practice over theorizing**  
+**Testing in practice over theorizing**
 This repository is built from real accounting environments, especially self-employed and e-commerce files, rather than generic AI demos.
 
-**Reusing over improvising**  
+**Reusing over improvising**
 A good skill should capture a repeatable pattern that is worth using again.
 
-**Iterating in public**  
+**Iterating in public**
 This is a build-in-public project. The workflows should improve as they encounter more edge cases and better criticism.
 
 ## Related Repositories
