@@ -80,6 +80,7 @@ Earlier skills prepare and structure accounting data. Later skills review that d
 | reviewing | reviewing-bookkeeping | Active | Current flagship build |
 | reviewing | detecting-ledger-anomalies | In progress | Adjacent review workflow |
 | generating | generating-client-queries | In progress | Follow-up support after review |
+| researching | researching-tax-questions | Active | T1, GST/HST, payroll — federal sources, quoted extracts, confidence assessment |
 | processing | processing-documents | Planned | Intake and extraction support |
 | categorizing | categorizing-transactions | Planned | Early-stage transaction workflow |
 | mapping | mapping-vendors | Planned | Reusable vendor treatment patterns |
