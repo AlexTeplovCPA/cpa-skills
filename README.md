@@ -14,8 +14,8 @@ The goal is to build reusable skills that reflect how accounting work actually m
 
 This repository is practitioner-facing. It is separate from the client-facing repositories:
 
-- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — preparation workflows for Canadian IT contractors
-- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — accounting workflows for Canadian e-commerce sellers
+- [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — client-facing preparation workflows for Canadian IT contractors
+- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — client-facing preparation workflows for Canadian e-commerce sellers
 
 ## How This Repository Fits the Broader System
 
