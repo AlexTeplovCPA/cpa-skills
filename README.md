@@ -17,6 +17,16 @@ This repository is practitioner-facing. It is separate from the client-facing re
 - [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — preparation workflows for Canadian IT contractors
 - [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — accounting workflows for Canadian e-commerce sellers
 
+## How This Repository Fits the Broader System
+
+This repository is the practitioner-facing layer in a three-repository system:
+
+- `cpa-skills` — practitioner-facing workflow library for CPAs, bookkeepers, and accountant-adjacent AI users
+- `it-contractors-skills` — client-facing preparation workflows for Canadian IT contractors
+- `ecommerce-skills` — client-facing preparation workflows for Canadian e-commerce sellers
+
+The role of `cpa-skills` is to make the accounting workflow method visible. The client-facing repositories show how that method is applied to specific niches.
+
 ## Why This Repository Exists
 
 There is a gap between deep technical accounting knowledge and consistent execution of repeatable work inside a practice.
@@ -235,7 +245,7 @@ This is a build-in-public project. The workflows should improve as they encounte
 ## Related Repositories
 
 - [**it-contractors-skills**](https://github.com/alexteplovcpa/it-contractors-skills) — Client-facing preparation workflows for Canadian IT contractors.
-- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — Client-facing accounting workflows for Canadian e-commerce sellers.
+- [**ecommerce-skills**](https://github.com/alexteplovcpa/ecommerce-skills) — Client-facing preparation workflows for Canadian e-commerce sellers.
 
 ## About
 
